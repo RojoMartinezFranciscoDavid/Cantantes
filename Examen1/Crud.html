@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('token');
+        const usuarioJSON = localStorage.getItem('usuario');
+        
+        if (token && usuarioJSON) {
+            const usuario = JSON.parse(usuarioJSON);
+            
+            const currentPage = window.location.pathname.split('/').pop();
+            
+            if (currentPage === '' || currentPage === 'index.html' || currentPage === 'Login.html') {
+                if (usuario.usuario === 'admin') {
+                    window.location.href = 'panel.html';
+                } else {
+                    window.location.href = 'Crud.html';
+                }
+            }
+        }
+    });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exámen 1</title>
+    <link href="estilo.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="escript.js" defer></script>
+</head>
+<body>
+   
+    <div class="header-frame">
+        <div class="login-container">
+            <div class="login-options">
+                <a href="Login.html" id="login-link">Iniciar Sesión</a>
+                <span class="separator">|</span>
+                <a href="Registro.html" id="register-link">Registrarse</a>
+            </div>
+            <div class="user-info" style="display: none;">
+                <span>Bienvenido, <span id="username">Usuario</span></span>
+                <a href="" id="logout-link">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <h1>CRUD de Cantantes</h1>
+
+    <form id="formAgregar">
+        <input type="hidden" id="id">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="nombre_artistico" placeholder="Nombre Artístico" required>
+        <input type="text" id="genero" placeholder="Género Musical" required>
+        <input type="text" id="pais" placeholder="País" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <input type="number" id="anos_carrera" placeholder="Años de carrera" required>
+        <input type="text" id="discografia" placeholder="Discografía">
+        <input type="text" id="redes_sociales" placeholder="Redes Sociales">
+        <input type="text" id="premios" placeholder="Premios">
+        <input type="text" id="situacion_amorosa" placeholder="Situación Amorosa">
+        <input type="text" id="cancion_favorita" placeholder="Canción Favorita">
+        <button type="submit">Guardar Cantante</button>
+    </form>
+
+    <h2>Lista de Cantantes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Nombre Artístico</th>
+                <th>Género</th>
+                <th>País</th>
+                <th>Edad</th>
+                <th>Años de carrera</th>
+                <th>Discografía</th>
+                <th>Redes Sociales</th>
+                <th>Premios</th>
+                <th>Situación Amorosa</th>
+                <th>Canción Favorita</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaCantantes"></tbody>
+    </table>
+</body>
+</html>
